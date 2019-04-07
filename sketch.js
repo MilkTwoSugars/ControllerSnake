@@ -83,7 +83,10 @@ function draw() {
 		}
 		
 		cooldown--;
-	}
+	} else {
+        tx = mouseX;
+        ty = mouseY;
+    }
 	
 	
 	x = lerp(x, tx, 0.01);
