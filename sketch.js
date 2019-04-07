@@ -5,8 +5,10 @@ var tx = 0;
 var ty = 0;
 
 var r = 255;
-var g = 255;
 var b = 100;
+
+var tr = 255;
+var tb = 100;
 
 var MAX_SIZE = 1000;
 var TARGET_MAX_SIZE = 1000;
@@ -75,11 +77,17 @@ function draw() {
 		}
 		
 		if (input.BisPressed) {
-			acc--;
+            acc--;
+            if (acc < 2) {
+                acc = 2;
+            }
 		}
 		
 		if (input.CisPressed) {
-			acc++;
+            acc++;
+            if (acc > 100) {
+                acc = 100;
+            }
 		}
 		
 		cooldown--;
@@ -90,7 +98,10 @@ function draw() {
 	
 	
 	x = lerp(x, tx, 0.01);
-	y = lerp(y, ty, 0.01);
+    y = lerp(y, ty, 0.01);
+    
+    r = lerp(r, tr, 0.01);
+    b = lerp(b, tb, 0.01);
 	
 	MAX_SIZE = lerp(MAX_SIZE, TARGET_MAX_SIZE, 0.01)
 	
@@ -121,9 +132,8 @@ function drawPoint(xpos, ypos, i) {
 }
 
 function newColour(){
-	r = random(255)
- g = random(255)
- b = random(255)
+	tr = random(255)
+    tb = random(255)
 }
 
 class ControllerInput {
@@ -189,6 +199,10 @@ window.addEventListener("gamepaddisconnected", (event) => {
   console.log("A gamepad disconnected:");
   console.log(event.gamepad);
 });
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+  }
 
 
 
